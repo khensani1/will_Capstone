@@ -21,6 +21,6 @@ jobs:
           key: ${{ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA6oTxxS+ptBWiCs6JgPI2z3u8dasa5yEcBzeyGskywW baloyimuxe567@gmail.com }}  
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  
           script: |
-            cd /opt/lampp/htdoct/will_Capstone
+            cd /opt/lampp/htdocs/will_Capstone
             git pull origin main
             sudo /opt/lampp/lamp restart
