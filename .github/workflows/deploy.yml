@@ -22,5 +22,5 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  
           script: |
             cd /opt/lampp/htdocs/will_Capstone
-            git pull origin main
+            git pull origin master
             sudo /opt/lampp/lamp restart
