@@ -189,6 +189,9 @@ if (isset($_POST['submit'])) {
                 <input type="text" id="employee_number" name="employee_number">
             </div>
 
+    
+
+
             <!-- Rights Field (Hidden) -->
             <input type="hidden" id="rights" name="rights">
 

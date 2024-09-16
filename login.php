@@ -121,14 +121,19 @@
                 <button type="submit">Log in</button>
                 <br>
                 <br>
-               <!--<button id="forgot_pass"type="submit">Forgot Password</button>  -->
-               <button id="forgot_pass" type="button" onclick="window.location.href='forgot_password.html'">Forgot Password</button>
-                <div class="link">
+                 <!--<button id="forgot_pass"type="submit">Forgot Password</button>  -->
+                 <button id="forgot_pass" type="button" onclick="window.location.href='forgot_password.php'">Forgot Password</button>
+                
+                <div class="link"></div>
                 <p>Don't have an account? <a href="user_register.php">Register here</a></p>
                 </div>
             </form>
         </div>
+    
         
         </body>
+        </html>
 
-</html>
+
+
+
