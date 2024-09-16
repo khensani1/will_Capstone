@@ -21,6 +21,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}  
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  
           script: |
-            cd /opt/lampp/htdocs/my-project
+            cd /opt/lampp/htdocs/will_Capstone
             git pull origin main
             sudo /opt/lampp/lamp restart
