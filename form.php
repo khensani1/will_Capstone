@@ -106,7 +106,7 @@ button:hover {
             <div class="header">
                 
             </div>
-            <h3 class="toTheRight">FORM J 295</h3>
+            <h3 class="toTheRight">FORM J</h3>
             <div class="centered">
                 <img src="images/images.jpeg" alt="Description of the image">
             </div>
