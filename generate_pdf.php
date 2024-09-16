@@ -97,7 +97,7 @@ $pdf->SetSubject('Generated PDF from Form');
 $pdf->SetKeywords('PDF, form, document');
 
 // Set default header and footer
-$pdf->SetHeaderData('', 0, 'Form Data', '');
+$pdf->SetHeaderData('', 0, 'Notice', '');
 $pdf->setFooterData(array(0,64,0), array(0,64,128));
 
 // Set default monospaced font
@@ -119,7 +119,7 @@ $pdf->AddPage();
 
 // Set content
 $html = "
-<h1>Form Submission</h1>
+<h1>Notice Content</h1>
 <p><strong>Language:</strong> $language</p>
 <p><strong>Title:</strong> $title</p>
 <p><strong>Province:</strong> $province</p>
