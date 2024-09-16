@@ -222,15 +222,7 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-       <!--- <a href="#">Dashboard</a> -->
-       <h1>&nbsp;&nbsp;&nbsp;Dashboard</h1>
-       <a href="#"><img src="C:\Users\User\Desktop\Ice_project\user.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Profile</a>
-        <a href="#"><img src="C:\Users\User\Desktop\Ice_project\view.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;View Notice</a>
-        <a href="#"><img src="C:\Users\User\Desktop\Ice_project\update.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Update Notice</a>
-        <a href="components/user_logout.php"><img src="C:\Users\User\Desktop\Ice_project\off.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Logout</a>
-    </div>
+   
 
     <!-- Main content area -->
     <div class="main-content">

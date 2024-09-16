@@ -265,7 +265,17 @@
             <div class="card">
                 <h2>create Pdf</h2>
               <!--  <button type="submit">CREATE</button> -->
-              <button class="metallic-button" type="button" onclick="window.location.href='form.html'">Generate pdf</button>
+              <button class="metallic-button" type="button" onclick="promptForFormId()">Generate PDF</button>
+
+              <script>
+                function promptForFormId() {
+                const formId = prompt("Please enter the Form ID:");
+                  if (formId) {
+                  // Redirect to the PHP file with the form_id as a query parameter
+               window.location.href = `generate_pdf.php?form_id=${formId}`;
+            }
+          }
+</script>
             </div>
            
 
