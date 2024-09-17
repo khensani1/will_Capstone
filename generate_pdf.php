@@ -119,7 +119,7 @@ $pdf->AddPage();
 
 // Set content
 $html = "
-<h1>Notice Content</h1>
+<h1>Notice Form Content</h1>
 <p><strong>Language:</strong> $language</p>
 <p><strong>Title:</strong> $title</p>
 <p><strong>Province:</strong> $province</p>
