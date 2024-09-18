@@ -21,7 +21,7 @@ jobs:
 
       - name: Test SSH Connectivity
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} 'echo SSH connection successful'
+          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=120 ${{ secrets.USER }}@${{ secrets.IP }} 'echo SSH connection successful'
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.1
@@ -34,3 +34,4 @@ jobs:
             cd /opt/lampp/htdocs/will_Capstone
             git pull origin master
             sudo /opt/lampp/lampp restart
+
