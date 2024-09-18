@@ -3,23 +3,23 @@ name: Deploy to server
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code 
         uses: actions/checkout@v3
 
-      - name: Deploy to server
-        uses: appleboy/scp-action@v0.1.3
+      - name: Deploy to server  
+        uses: appleboy/ssh-action@v0.1.1
         with:
-          host: ${{ secrets.IP }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          host: ${{ secrets.IP}  
+          username: ${{ secrets.USER}}  
+          key: ${{ secrets.SSH_KEY }}  
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}  
           script: |
             cd /opt/lampp/htdocs/will_Capstone
             git pull origin master
