@@ -22,3 +22,4 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "./"
           target: "/opt/lampp/htdocs/will_Capstone"
+          debug: true
