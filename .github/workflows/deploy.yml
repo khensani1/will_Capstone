@@ -16,11 +16,11 @@ jobs:
       - name: Deploy to server  
         uses: appleboy/ssh-action@v0.1.1
         with:
-          host: ${{ secrets.IP}  
+          host: ${{ secrets.IP}}
           username: ${{ secrets.USER}}  
           key: ${{ secrets.SSH_KEY }}  
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  
-          script:
+          script:  |
             cd /opt/lampp/htdocs/will_Capstone
             git pull origin master
             sudo /opt/lampp/lamp restart
