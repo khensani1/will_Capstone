@@ -3,7 +3,7 @@ name: Deploy to server
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.USER}}  
           key: ${{ secrets.SSH_KEY }}  
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  
-          script: |
+          script:
             cd /opt/lampp/htdocs/will_Capstone
             git pull origin master
             sudo /opt/lampp/lamp restart
