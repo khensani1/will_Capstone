@@ -3,24 +3,36 @@ name: Deploy to server
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code 
+      - name: Checkout code
         uses: actions/checkout@v3
+         
 
-      - name: Deploy to server  
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Test SSH Connectivity
+        run: |
+          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=120 ${{ secrets.USER }}@${{ secrets.IP }} 'echo SSH connection successful'
+
+      - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.1
         with:
-          host: ${{ secrets.IP}  
-          username: ${{ secrets.USER}}  
-          key: ${{ secrets.SSH_KEY }}  
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}  
+          host: ${{ secrets.IP }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd /opt/lampp/htdocs/will_Capstone
             git pull origin master
-            sudo /opt/lampp/lamp restart
+            sudo /opt/lampp/lampp restart
+
