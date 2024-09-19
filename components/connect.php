@@ -1,8 +1,8 @@
 <?php
 // Database connection settings
 $servername = "192.168.0.43"; // Server's IP address
-$username = "root"; // Default XAMPP username
-$password = ""; // Default XAMPP password (empty)
+$username = "gift"; // Default XAMPP username
+$password = "gift@112"; // Default XAMPP password (empty)
 $dbname = "publications"; // Database name
 
 // Create the DSN string (correct format for MySQL)
