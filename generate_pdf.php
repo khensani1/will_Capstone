@@ -4,8 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-
+#1212
 // Output buffering to prevent premature output
 ob_start();
 
@@ -144,16 +143,16 @@ $html = "
 <p><strong>User ID:</strong> $user_id</p>
 ";
 
-// Output the HTML content
+// HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
 
-// Define the path to save the PDF file
+// path to save the PDF file
 $filePath = '/opt/lampp/htdocs/will/form_submission.pdf';
 
-// Save the PDF file
+
 $pdf->Output($filePath, 'F');
 
-// Log successful PDF generation
+// Log successfu
 logMessage("PDF saved successfully at: " . $filePath);
 
 // Clean the output buffer
