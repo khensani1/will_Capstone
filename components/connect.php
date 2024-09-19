@@ -1,14 +1,14 @@
 <?php
- $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
+// Database connection settings
 $servername = "192.168.0.43"; // Server's IP address
 $username = "root"; // Default XAMPP username
 $password = ""; // Default XAMPP password (empty)
-$dbname = "publications"; // Rename the database to avoid special characters
+$dbname = "publications"; // Database name
+
+// Create the DSN string (correct format for MySQL)
+$dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
 
 try {
-    // Create the DSN string (correct format for MySQL)
-   
-    
     // Create a PDO instance (connect to the database)
     $conn = new PDO($dsn, $username, $password);
     
@@ -20,3 +20,4 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+?>
