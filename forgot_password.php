@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
             $mail->SMTPAuth = true;
             $mail->Username = 'sarahmogala960@gmail.com'; // Gmail address
             $mail->Password = 'guzc bcit hunv jqga'; //  App Password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             //Recipients
