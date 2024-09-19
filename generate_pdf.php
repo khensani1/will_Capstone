@@ -4,8 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-#test1212
+#1212
 // Output buffering to prevent premature output
 ob_start();
 

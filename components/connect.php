@@ -1,4 +1,5 @@
 <?php
+ $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
 $servername = "192.168.0.43"; // Server's IP address
 $username = "root"; // Default XAMPP username
 $password = ""; // Default XAMPP password (empty)
@@ -6,7 +7,7 @@ $dbname = "publications"; // Rename the database to avoid special characters
 
 try {
     // Create the DSN string (correct format for MySQL)
-    $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
+   
     
     // Create a PDO instance (connect to the database)
     $conn = new PDO($dsn, $username, $password);
