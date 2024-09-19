@@ -1,7 +1,8 @@
 <?php
+session_start(); // Start session at the beginning
 include 'components/connect.php';
 
-session_start(); // Start session at the beginning
+
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify password
         if (password_verify($password, $user['password'])) {
             // Start session and set user info
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_role'] = $user['role'];
             $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
 
