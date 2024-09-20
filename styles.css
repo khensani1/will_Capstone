@@ -1,0 +1,22 @@
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+    background-color: grey;
+    text-emphasis-color: white;
+}
+#results {
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.video-item {
+    margin-bottom: 20px;
+}
+.video-item img {
+    max-width: 100%;
+    height: auto;
+}
