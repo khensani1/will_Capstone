@@ -43,6 +43,15 @@ if (isset($_POST['submit'])) {
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
+            // Disable SSL certificate verification (for development only, not recommended for production)
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+
             //Recipients
             $mail->setFrom('sarahmogala960@gmail.com', 'ICE Support Team');
             $mail->addAddress($email);
@@ -61,18 +70,15 @@ if (isset($_POST['submit'])) {
         echo "No user found with that email.";
     }
 }
-
-
 ?>
 
 <!-- HTML Form -->
-
 <form method="post" action="forgot_password.php">
     <label for="email">Enter your email:</label>
     <input type="email" name="email" id="email" required>
     <button type="submit" name="submit">Send Reset Link</button>
-   
 </form>
+
 <!-- Display Error Message -->
 <?php if (!empty($error_message)) { ?>
     <p><?php echo $error_message; ?></p>
