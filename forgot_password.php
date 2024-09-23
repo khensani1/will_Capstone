@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $stmt->execute([$user['user_id'], $resertToken, $expiry_date, $created_date]);
 
         // Send reset link to user's email address
-        $reset_link = "http://localhost/PontshoProject/reset_password.php?resertToken=" . $resertToken;
+        $reset_link = "http://192.168.0.43/will_Capstone/reset_password.php?resertToken=" . $resertToken;
         
         // PHPMailer configuration
         $mail = new PHPMailer(true);
