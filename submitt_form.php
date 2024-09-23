@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Execute the statement and check for success
     if ($stmt->execute()) {
         // Redirect to view page with success message
-        header("Location: view.php?success=1");
+        header("Location: client_dashboard.php?success=1");
         exit();
     } else {
         echo "Error: " . $stmt->errorInfo()[2];  // Show the error message from PDO
