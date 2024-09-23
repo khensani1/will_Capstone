@@ -254,13 +254,13 @@
             <div class="card">
                 <h2>Fill Form</h2>
               <!--  <button type="submit">CREATE</button> -->
-              <button class="metallic-button" type="button" onclick="window.location.href='form.html'">Create Form</button>
+              <button class="metallic-button" type="button" onclick="window.location.href='form.php'">Create Form</button>
             </div>
             
             <div class="card">
-                <h2>View Form</h2>
+                <h2>View Notice</h2>
               <!--  <button type="submit">CREATE</button> -->
-              <button class="metallic-button" type="button" onclick="window.location.href='form.html'">View Form</button>
+              <button class="metallic-button" type="button" onclick="window.location.href='notice.php'">View Form</button>
             </div>
             <div class="card">
                 <h2>create Pdf</h2>
