@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':role', $role);
 
         if ($stmt->execute()) {
-            echo "Registration successful!";
+            //echo "Registration successful!";
             // Redirect to a login page or another page
             header("Location: login.php");
             exit();
