@@ -108,7 +108,7 @@ button:hover {
             </div>
             <h3 class="toTheRight">Form J295</h3>
             <div class="centered">
-                <img src="images/images.jpeg" alt="Description of the image">
+                <img src="images/gavLogo.png" alt="Description of the image">
             </div>
             <h3 class="centered">NOTICE OF CURATOR AND TUTOR</h3>
             in terms of section 75 of the Administration of Estates Act, No. 66 of 1965 (as amended), notice is hereby given of 
