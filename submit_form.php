@@ -4,10 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-$servername = "localhost";  // Your database server, usually 'localhost'
-$username = "root";         // Your MySQL username, default is 'root' for XAMPP
-$password = "";             // Your MySQL password, default is empty for XAMPP
-$dbname = "publications";  // The name of the database you created
+include 'components/connect.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,7 +13,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$form_id = $_POST['form_id'];
+//$form_id = $_POST['form_id'];
 $language = $_POST['language'];
 $title = $_POST['title'];
 $province = $_POST['province'];
@@ -39,23 +36,31 @@ $publication_date = $_POST['publication_date'];
 
 
 
-$stmt = $conn->prepare("INSERT INTO form (form_id,language, title, province, race, first_name, last_name, address,addressOf, nameOfcurator, addressCurator, schedule_meeting, start_date, metropolitan, publisher_name, publisher_address, publisher_email, date_submitted, publisher_telephone, publication_date,user_id) VALUES (?,? ,? ,? ,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssssssssssssssss", $form_id,$language, $title, $province, $race, $first_name, $last_name, $address,$addressOf, $nameOfcurator, $addressCurator, $schedule_meeting, $start_date, $metropolitan, $publisher_name, $publisher_address, $publisher_email, $date_submitted, $publisher_telephone, $publication_date,$user_id,);
+$stmt = $conn->prepare("INSERT INTO form (language, title, province, race, first_name, last_name, address,addressOf, nameOfcurator, addressCurator, schedule_meeting, start_date, metropolitan, publisher_name, publisher_address, publisher_email, date_submitted, publisher_telephone, publication_date) VALUES (? ,? ,? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssssssssssssssss", $language, $title, $province, $race, $first_name, $last_name, $address,$addressOf, $nameOfcurator, $addressCurator, $schedule_meeting, $start_date, $metropolitan, $publisher_name, $publisher_address, $publisher_email, $date_submitted, $publisher_telephone, $publication_date,);
 
 // Execute the statement
 if ($stmt->execute()) {
     // Get the last inserted form_id
     $form_id = $conn->insert_id;
 
-    // Redirect to notice.php with the form_id in the URL
-    header("Location: client_dashboard.php?form_id=" . $form_id);
-    exit(); // Stop further script execution
+    // Prepare and execute the second insert for the 'documents' table
+    $stmt2 = $conn->prepare("INSERT INTO documents (title, province, first_name, last_name, address, start_date, metropolitan, publisher_address, date_submitted, publication_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt2->bind_param("ssssssssss", $title, $province, $first_name, $last_name, $address, $start_date, $metropolitan, $publisher_address, $date_submitted, $publication_date);
+    
+    if ($stmt2->execute()) {
+        // Redirect to notice.php with the form_id in the URL
+        header("Location: client_dashboard.php?form_id=" . $form_id);
+        exit(); // Stop further script execution
+    } else {
+        echo "Error inserting into documents: " . $stmt2->error;
+    }
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error inserting into form: " . $stmt1->error;
 }
 
-
 // Close the statement and connection
-$stmt->close();
+$stmt1->close();
+$stmt2->close();
 $conn->close();
 ?>

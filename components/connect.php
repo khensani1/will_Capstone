@@ -17,7 +17,7 @@ try {
     // Set PDO error mode to exception to handle errors
     $conn->setAttribute(PDO::ATTR_ERRMODE, value: PDO::ERRMODE_EXCEPTION);
     
-    echo "Connected successfully"; // Optional: for testing connection
+    //echo "Connected successfully"; // Optional: for testing connection
     
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();

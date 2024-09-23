@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 session_start(); // Start session at the beginning of the script
 include 'components/connect.php';
 
@@ -44,3 +45,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "No user found with that email.";
     }
 }
+
+ob_end_flush(); // Flush the output buffer and send output

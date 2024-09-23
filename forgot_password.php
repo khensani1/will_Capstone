@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $stmt->execute([$user['user_id'], $resertToken, $expiry_date, $created_date]);
 
         // Send reset link to user's email address
-        $reset_link = "http://localhost/PontshoProject/reset_password.php?resertToken=" . $resertToken;
+        $reset_link = "http://192.168.0.43/will_Capstone/reset_password.php?resertToken=" . $resertToken;
         
         // PHPMailer configuration
         $mail = new PHPMailer(true);
@@ -42,6 +42,15 @@ if (isset($_POST['submit'])) {
             $mail->Password = 'guzc bcit hunv jqga'; //  App Password
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
+
+            // Disable SSL certificate verification 
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
 
             //Recipients
             $mail->setFrom('sarahmogala960@gmail.com', 'ICE Support Team');
@@ -61,18 +70,15 @@ if (isset($_POST['submit'])) {
         echo "No user found with that email.";
     }
 }
-
-
 ?>
 
 <!-- HTML Form -->
-
 <form method="post" action="forgot_password.php">
     <label for="email">Enter your email:</label>
     <input type="email" name="email" id="email" required>
     <button type="submit" name="submit">Send Reset Link</button>
-   
 </form>
+
 <!-- Display Error Message -->
 <?php if (!empty($error_message)) { ?>
     <p><?php echo $error_message; ?></p>
