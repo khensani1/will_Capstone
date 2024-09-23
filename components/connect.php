@@ -10,14 +10,21 @@ $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
 
 try {
     // Create a PDO instance (connect to the database)
+
     $conn = new PDO($dsn, $username, $password);
+>>>>>>> 24b0ef5acc111c75f54b28e8a5af2662235da4b1
     
     // Set PDO error mode to exception to handle errors
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, value: PDO::ERRMODE_EXCEPTION);
     
     echo "Connected successfully"; // Optional: for testing connection
     
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+<<<<<<< HEAD
+
+
+=======
 ?>
+>>>>>>> 24b0ef5acc111c75f54b28e8a5af2662235da4b1

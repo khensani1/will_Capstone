@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            // Disable SSL certificate verification (for development only, not recommended for production)
+            // Disable SSL certificate verification 
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
