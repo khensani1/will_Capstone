@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-#1212_10111
 // Output buffering to prevent premature output
 ob_start();
 
@@ -118,45 +117,49 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // Add a page
 $pdf->AddPage();
 
-// Set content
-$html = "
-<h1>Notice Content</h1>
-<p><strong>Language:</strong> $language</p>
-<p><strong>Title:</strong> $title</p>
-<p><strong>Province:</strong> $province</p>
-<p><strong>Race:</strong> $race</p>
-<p><strong>First Name:</strong> $first_name</p>
-<p><strong>Last Name:</strong> $last_name</p>
-<p><strong>Address:</strong> $address</p>
-<p><strong>Address Of:</strong> $addressOf</p>
-<p><strong>Name Of curator:</strong> $nameOfcurator</p>
-<p><strong>Address Of Curator:</strong> $addressCurator</p>
-<p><strong>Schedule meeting:</strong> $schedule_meeting</p>
-<p><strong>Start date:</strong> $start_date</p>
-<p><strong>Metropolitan:</strong> $metropolitan</p>
-<p><strong>Publisher name:</strong> $publisher_name</p>
-<p><strong>Publisher email:</strong> $publisher_email</p>
-<p><strong>Publisher address:</strong> $publisher_address</p>
-<p><strong>Date submitted:</strong> $date_submitted</p>
-<p><strong>Publisher telephone:</strong> $publisher_telephone</p>
-<p><strong>Publication date:</strong> $publication_date</p>
-<p><strong>User ID:</strong> $user_id</p>
+// Construct notice message
+$notice = "
+<h1>Notice of Submission</h1>
+<p>This is to formally notify you that the following details have been submitted:</p>
+<ul>
+    <li><strong>Language:</strong> $language</li>
+    <li><strong>Title:</strong> $title</li>
+    <li><strong>Province:</strong> $province</li>
+    <li><strong>Race:</strong> $race</li>
+    <li><strong>First Name:</strong> $first_name</li>
+    <li><strong>Last Name:</strong> $last_name</li>
+    <li><strong>Address:</strong> $address</li>
+    <li><strong>Address Of:</strong> $addressOf</li>
+    <li><strong>Name Of Curator:</strong> $nameOfcurator</li>
+    <li><strong>Address Of Curator:</strong> $addressCurator</li>
+    <li><strong>Schedule Meeting:</strong> $schedule_meeting</li>
+    <li><strong>Start Date:</strong> $start_date</li>
+    <li><strong>Metropolitan:</strong> $metropolitan</li>
+    <li><strong>Publisher Name:</strong> $publisher_name</li>
+    <li><strong>Publisher Address:</strong> $publisher_address</li>
+    <li><strong>Publisher Email:</strong> $publisher_email</li>
+    <li><strong>Date Submitted:</strong> $date_submitted</li>
+    <li><strong>Publisher Telephone:</strong> $publisher_telephone</li>
+    <li><strong>Publication Date:</strong> $publication_date</li>
+    <li><strong>User ID:</strong> $user_id</li>
+</ul>
+<p>Please review the information carefully and contact us if there are any discrepancies.</p>
 ";
 
-// HTML content
-$pdf->writeHTML($html, true, false, true, false, '');
+// HTML content for the PDF
+$pdf->writeHTML($notice, true, false, true, false, '');
 
-// path to save the PDF file
+// Path to save the PDF file
 $filePath = '/opt/lampp/htdocs/will/form_submission.pdf';
-
 
 $pdf->Output($filePath, 'F');
 
-// Log successfu
+// Log success
 logMessage("PDF saved successfully at: " . $filePath);
 
 // Clean the output buffer
 ob_end_clean();
+
 // Display the preview and download option
 echo "<h2>PDF Generated Successfully</h2>";
 echo "<p><a href='/will/form_submission.pdf' target='_blank'>Preview PDF</a></p>";
