@@ -3,10 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "publications";
+include 'components/connect.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,20 +13,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if form_id is set in the query string
-if (isset($_GET['form_id'])) {
-    $form_id = $_GET['form_id'];
+// Prepare the SQL query to fetch the last doc_id
+$sql = "SELECT doc_id FROM documents ORDER BY doc_id DESC LIMIT 1";
+$result = $conn->query($sql);
 
-    // Prepare the SQL statement to fetch data based on form_id
-        // Fetch form data based on form_id
-        $sql = "SELECT * FROM form WHERE form_id = ";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $form_id);
-        $stmt->execute();
-        
+if ($result->num_rows > 0) {
+    // Fetch the last doc_id
+    $row = $result->fetch_assoc();
+    $doc_id = $row['doc_id'];
 
-    // Fetch the result
+    
+    echo "Last doc_id: " . $doc_id;
+
+    // Free result set
+    $result->free();
+
+    // Example: Fetch the document details based on the last doc_id
+    $sql = "SELECT * FROM documents WHERE doc_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $doc_id);
+    $stmt->execute();
+
+    // Fetch the result (called only once)
     $result = $stmt->get_result();
+
     if ($result->num_rows > 0) {
         // Fetch the data as an associative array and display the content
         $row = $result->fetch_assoc();
