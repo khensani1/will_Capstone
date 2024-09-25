@@ -141,7 +141,6 @@ $notice = "
     <li><strong>Date Submitted:</strong> $date_submitted</li>
     <li><strong>Publisher Telephone:</strong> $publisher_telephone</li>
     <li><strong>Publication Date:</strong> $publication_date</li>
-    <li><strong>User ID:</strong> $user_id</li>
 </ul>
 <p>Please review the information carefully and contact us if there are any discrepancies.</p>
 ";
@@ -164,4 +163,28 @@ ob_end_clean();
 echo "<h2>PDF Generated Successfully</h2>";
 echo "<p><a href='/will/form_submission.pdf' target='_blank'>Preview PDF</a></p>";
 echo "<p><a href='/will/form_submission.pdf' download='form_submission.pdf'>Download PDF</a></p>";
+
+// Generate the notice with PHP dynamically
+echo '
+<div class="center"><h2>NOTICE OF CURATOR AND TUTOR</h2></div>
+
+<p class="indentation">In terms of section 75 of the Administration of Estates Act No. 66 of 1965 (as amended),
+notice is hereby given that the Master of the High Court has ';
+if ($form_data['appointment_or_termination'] == 'appointment') {
+    echo 'appointed';
+} else {
+    echo 'terminated the appointment of';
+}
+echo ' ' . htmlspecialchars($form_data['nameOfcurator']) . ', residing at ' . htmlspecialchars($form_data['addressCurator']) . ', as the curator or tutor for ' . htmlspecialchars($form_data['first_name']) . ' ' . htmlspecialchars($form_data['last_name']) . ' residing at ' . htmlspecialchars($form_data['address']) . '. This ' . htmlspecialchars($form_data['appointment_or_termination']) . ' took effect on ' . htmlspecialchars($form_data['start_date']) . ' as per the records of the Master of the High Court (' . htmlspecialchars($form_data['metropolitan']) . ').</p>
+
+<div class="center"><h2>KENNISGEWINGS VAN KURATORS EN VOOGDE</h2></div>
+
+<p class="indentation">Ingevolge Artikel 75 van die Boedelwet No. 66 van 1965 (soos gewysig), word hierby kennis gegee dat die Meester van die Hoë Hof ';
+if ($form_data['appointment_or_termination'] == 'aanstelling') {
+    echo 'aangestel het';
+} else {
+    echo 'die aanstelling van';
+}
+echo ' ' . htmlspecialchars($form_data['nameOfcurator']) . ', woonagtig by ' . htmlspecialchars($form_data['addressCurator']) . ', as kurator of voog vir ' . htmlspecialchars($form_data['first_name']) . ' ' . htmlspecialchars($form_data['last_name']) . ' woonagtig by ' . htmlspecialchars($form_data['address']) . '. Hierdie ' . htmlspecialchars($form_data['appointment_or_termination']) . ' het in werking getree op ' . htmlspecialchars($form_data['start_date']) . ' volgens die rekords van die Meester van die Hoë Hof (' . htmlspecialchars($form_data['metropolitan']) . ').</p>';
 ?>
+
