@@ -1,7 +1,7 @@
 <?php
-ob_start(); // Start output buffering
-session_start(); // Start session at the beginning of the script
+session_start();
 include 'components/connect.php';
+
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,27 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if user exists
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
         // Verify password
         if (password_verify($password, $user['password'])) {
-            // Set session variables
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_role'] = $user['role'];
-            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-
+            // Start session and set user info
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
             // Redirect to the appropriate page based on the user's role
-            if ($user['role'] === 'admin') {
-                header("Location: admin_dashboard.php");
-                exit(); // Exit after header to prevent further script execution
-            } elseif ($user['role'] === 'editor') {
-                header("Location: editor_dashboard.php");
-                exit();
-            } elseif ($user['role'] === 'client') {
-                header("Location: client_dashboard.php");
-                exit();
-            } else {
-                echo "Invalid user role.";
+            switch ($user['role']) {
+                case 0:
+                    header("Location: admin_dashboard.php");
+                    break;
+                case 1:
+                    header("Location: editor_dashboard.php");
+                    break;
+                case 2:
+                    header("Location: client_dashboard.php");
+                    break;
+                default:
+                    echo "Invalid user role.";
             }
+            exit();
         } else {
             echo "Invalid password.";
         }
@@ -46,4 +45,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-ob_end_flush(); // Flush the output buffer and send output
+
