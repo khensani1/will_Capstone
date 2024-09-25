@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_form'])) {
     include 'components/connect.php'; // Connection setup via external file
 
     // Sanitize the input
-    $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
+    $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS); // Updated line
 
     if (!empty($form_id)) {
         try {
