@@ -1,12 +1,15 @@
 <?php
 session_start();  // Start session to manage admin privileges
 
-// Include your database connection script
-include 'components/connect.php';  // Adjust the path as necessary
+// Debugging: Check if the session started successfully
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    die("Error: Session failed to start. Please check server session configuration.");
+}
 
-// Debugging: Check if session variables are being set correctly
+// Debugging: Log session data to check if 'user_role' is set
 if (!isset($_SESSION['user_role'])) {
-    die("Error: User role not set in the session.");
+    error_log('Session Data: ' . print_r($_SESSION, true)); // Logs session data to server log
+    die("Error: User role not set in the session. Please log in as an admin.");
 }
 
 // Check if the user is logged in and is an admin
@@ -15,6 +18,9 @@ if ($_SESSION['user_role'] !== 'admin') {
     header('Location: login.php');
     exit();  // Ensure no further code is executed
 }
+
+// Include your database connection script
+include 'components/connect.php';  // Adjust the path as necessary
 
 // Initialize success and error message variables
 $success_message = '';
