@@ -5,16 +5,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-// Database connection details
-$db_name = 'mysql:host=192.168.0.43;dbname=publications(1)';
-$user_name = 'root';
-$user_password = '';
+// Include the database connection
+include 'components/connect.php';
+
+// Initialize forms variable
+$forms = [];  // Initialize as an empty array
 
 try {
-    // Create a PDO instance (connect to the database)
-    $conn = new PDO($db_name, $user_name, $user_password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     // Prepare SQL statement to fetch all records
     $sql = "SELECT * FROM form";
     $stmt = $conn->prepare($sql);
@@ -94,7 +91,7 @@ try {
                     <td><?php echo htmlspecialchars($form['form_id']); ?></td>
                     <td><?php echo htmlspecialchars($form['language']); ?></td>
                     <td><?php echo htmlspecialchars($form['province']); ?></td>
-                    <td><?php  echo htmlspecialchars($form['race']); ?></td>
+                    <td><?php echo htmlspecialchars($form['race']); ?></td>
                     <td><?php echo htmlspecialchars($form['title']); ?></td>
                     <td><?php echo htmlspecialchars($form['first_name']); ?></td>
                     <td><?php echo htmlspecialchars($form['last_name']); ?></td>

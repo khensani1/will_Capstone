@@ -1,13 +1,26 @@
 <?php
 session_start();  // Start session to manage admin privileges
 
-// Include your database connection script
-include 'components/connect.php';  // Adjust the path as necessary
+// Debugging: Check if the session started successfully
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    die("Error: Session failed to start. Please check server session configuration.");
+}
+
+// Debugging: Log session data to check if 'user_role' is set
+if (!isset($_SESSION['user_role'])) {
+    error_log('Session Data: ' . print_r($_SESSION, true)); // Logs session data to server log
+    die("Error: User role not set in the session. Please log in as an admin.");
+}
 
 // Check if the user is logged in and is an admin
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
-    die("Access denied. Admin privileges required.");
+if ($_SESSION['user_role'] !== 'admin') {
+    // Redirect to login page if the user is not an admin
+    header('Location: login.php');
+    exit();  // Ensure no further code is executed
 }
+
+// Include your database connection script
+include 'components/connect.php';  // Adjust the path as necessary
 
 // Initialize success and error message variables
 $success_message = '';
@@ -24,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
             // Execute the query
-            if ($stmt->execute()) {
+            if ($stmt->execute()) { 
                 // Check if a user was actually deleted
                 if ($stmt->rowCount() > 0) {
                     $success_message = "User with ID $user_id has been deleted successfully.";
