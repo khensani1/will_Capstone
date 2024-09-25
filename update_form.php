@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_record'])) {
 
     try {
         
-        $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
+        $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Prepare SQL statement to fetch the record based on form_id
         $sql = "SELECT * FROM form WHERE form_id = :form_id";
@@ -61,26 +61,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_record'])) {
 
     try {
         // Retrieve and sanitize form data
-        $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
-        $language = filter_input(INPUT_POST, 'language', FILTER_SANITIZE_STRING);
-        $province = filter_input(INPUT_POST, 'province', FILTER_SANITIZE_STRING);
-        $race = filter_input(INPUT_POST, 'race', FILTER_SANITIZE_STRING);
-        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
-        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
-        $addressOf = filter_input(INPUT_POST, 'addressOf', FILTER_SANITIZE_STRING);
-        $nameOfcurator = filter_input(INPUT_POST, 'nameOfcurator', FILTER_SANITIZE_STRING);
-        $addressCurator = filter_input(INPUT_POST, 'addressCurator', FILTER_SANITIZE_STRING);
-        $schedule_meeting = filter_input(INPUT_POST, 'schedule_meeting', FILTER_SANITIZE_STRING);
-        $start_date = filter_input(INPUT_POST, 'start_date', FILTER_SANITIZE_STRING);
-        $metropolitan = filter_input(INPUT_POST, 'metropolitan', FILTER_SANITIZE_STRING);
-        $publisher_name = filter_input(INPUT_POST, 'publisher_name', FILTER_SANITIZE_STRING);
-        $publisher_address = filter_input(INPUT_POST, 'publisher_address', FILTER_SANITIZE_STRING);
+        $form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $language = filter_input(INPUT_POST, 'language', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $province = filter_input(INPUT_POST, 'province', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $race = filter_input(INPUT_POST, 'race', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $addressOf = filter_input(INPUT_POST, 'addressOf', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $nameOfcurator = filter_input(INPUT_POST, 'nameOfcurator', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $addressCurator = filter_input(INPUT_POST, 'addressCurator', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $schedule_meeting = filter_input(INPUT_POST, 'schedule_meeting', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $start_date = filter_input(INPUT_POST, 'start_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $metropolitan = filter_input(INPUT_POST, 'metropolitan', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $publisher_name = filter_input(INPUT_POST, 'publisher_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $publisher_address = filter_input(INPUT_POST, 'publisher_address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $publisher_email = filter_input(INPUT_POST, 'publisher_email', FILTER_SANITIZE_EMAIL);
-        $date_submitted = filter_input(INPUT_POST, 'date_submitted', FILTER_SANITIZE_STRING);
-        $publisher_telephone = filter_input(INPUT_POST, 'publisher_telephone', FILTER_SANITIZE_STRING);
-        $publication_date = filter_input(INPUT_POST, 'publication_date', FILTER_SANITIZE_STRING);
+        $date_submitted = filter_input(INPUT_POST, 'date_submitted', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $publisher_telephone = filter_input(INPUT_POST, 'publisher_telephone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $publication_date = filter_input(INPUT_POST, 'publication_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // SQL query for updating the record
         $sql = "
@@ -92,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_record'])) {
                 first_name = :first_name,
                 last_name = :last_name,
                 address = :address,
-                addressOf =:addressOf,
-                nameOfcurator =:nameOfcurator,
-                addressCurator =:addressCurator,
+                addressOf = :addressOf,
+                nameOfcurator = :nameOfcurator,
+                addressCurator = :addressCurator,
                 schedule_meeting = :schedule_meeting,
                 start_date = :start_date,
                 metropolitan = :metropolitan,
@@ -225,140 +225,101 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_record'])) {
             width: 100%;
             margin-top: 10px;
         }
-        button:focus,
-        input:focus {
-            outline: none;
-            border-color: #007BFF;
-        }
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-        }
     </style>
 </head>
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        <div class="container">
-            <div class="header">
-                <h1>Load or Update Record</h1>
-            </div>
-
+    <div class="container">
+        <div class="header">
+            <h1>Update Form</h1>
+        </div>
+        <form action="" method="POST">
             <div class="form-group">
-                <label for="form_id">Record ID:</label>
-                <input type="text" id="form_id" name="form_id" value="<?php echo htmlspecialchars($form_data['form_id']); ?>" required>
+                <label for="form_id">Form ID</label>
+                <input type="text" name="form_id" id="form_id" value="<?php echo htmlspecialchars($form_data['form_id']); ?>" required>
             </div>
-
             <div class="form-group">
                 <button type="submit" name="load_record">Load Record</button>
             </div>
-
-            <?php if (!empty($form_data['form_id'])): ?>
-                <!-- The form for updating fields goes here -->
-                <div class="form-group">
-                    <label>Form Language:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="language" value="English" <?php echo ($form_data['language'] === 'English') ? 'checked' : ''; ?>> English</label>
-                        <label><input type="radio" name="language" value="Afrikaans" <?php echo ($form_data['language'] === 'Afrikaans') ? 'checked' : ''; ?>> Afrikaans</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="province">Province:</label>
-                    <input type="text" id="province" name="province" value="<?php echo htmlspecialchars($form_data['province']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="race">Race:</label>
-                    <input type="text" id="race" name="race" value="<?php echo htmlspecialchars($form_data['race']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($form_data['title']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($form_data['first_name']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($form_data['last_name']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($form_data['address']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="addressOf">Address of:</label>
-                    <input type="text" id="addressOf" name="addressOf" value="<?php echo htmlspecialchars($form_data['addressOf']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="nameOfcurator">Curator's Name:</label>
-                    <input type="text" id="nameOfcurator" name="nameOfcurator" value="<?php echo htmlspecialchars($form_data['nameOfcurator']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="addressCurator">Curator's Address:</label>
-                    <input type="text" id="addressCurator" name="addressCurator" value="<?php echo htmlspecialchars($form_data['addressCurator']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="schedule_meeting">Schedule Meeting:</label>
-                    <input type="text" id="schedule_meeting" name="schedule_meeting" value="<?php echo htmlspecialchars($form_data['schedule_meeting']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="start_date">Start Date:</label>
-                    <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($form_data['start_date']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="metropolitan">Metropolitan:</label>
-                    <input type="text" id="metropolitan" name="metropolitan" value="<?php echo htmlspecialchars($form_data['metropolitan']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="publisher_name">Publisher Name:</label>
-                    <input type="text" id="publisher_name" name="publisher_name" value="<?php echo htmlspecialchars($form_data['publisher_name']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="publisher_address">Publisher Address:</label>
-                    <input type="text" id="publisher_address" name="publisher_address" value="<?php echo htmlspecialchars($form_data['publisher_address']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="publisher_email">Publisher Email:</label>
-                    <input type="email" id="publisher_email" name="publisher_email" value="<?php echo htmlspecialchars($form_data['publisher_email']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="date_submitted">Date Submitted:</label>
-                    <input type="date" id="date_submitted" name="date_submitted" value="<?php echo htmlspecialchars($form_data['date_submitted']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="publisher_telephone">Publisher Telephone:</label>
-                    <input type="text" id="publisher_telephone" name="publisher_telephone" value="<?php echo htmlspecialchars($form_data['publisher_telephone']); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="publication_date">Publication Date:</label>
-                    <input type="date" id="publication_date" name="publication_date" value="<?php echo htmlspecialchars($form_data['publication_date']); ?>">
-                </div>
-
-                <!-- Update button -->
-                <div class="form-group">
-                    <button type="submit" name="update_record">Update Record</button>
-                </div>
-            <?php endif; ?>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="language">Language</label>
+                <input type="text" name="language" id="language" value="<?php echo htmlspecialchars($form_data['language']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="province">Province</label>
+                <input type="text" name="province" id="province" value="<?php echo htmlspecialchars($form_data['province']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="race">Race</label>
+                <input type="text" name="race" id="race" value="<?php echo htmlspecialchars($form_data['race']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($form_data['title']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name" value="<?php echo htmlspecialchars($form_data['first_name']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="last_name" value="<?php echo htmlspecialchars($form_data['last_name']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" value="<?php echo htmlspecialchars($form_data['address']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="addressOf">Address of</label>
+                <input type="text" name="addressOf" id="addressOf" value="<?php echo htmlspecialchars($form_data['addressOf']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="nameOfcurator">Name of Curator</label>
+                <input type="text" name="nameOfcurator" id="nameOfcurator" value="<?php echo htmlspecialchars($form_data['nameOfcurator']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="addressCurator">Address of Curator</label>
+                <input type="text" name="addressCurator" id="addressCurator" value="<?php echo htmlspecialchars($form_data['addressCurator']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="schedule_meeting">Schedule Meeting</label>
+                <input type="text" name="schedule_meeting" id="schedule_meeting" value="<?php echo htmlspecialchars($form_data['schedule_meeting']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" name="start_date" id="start_date" value="<?php echo htmlspecialchars($form_data['start_date']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="metropolitan">Metropolitan</label>
+                <input type="text" name="metropolitan" id="metropolitan" value="<?php echo htmlspecialchars($form_data['metropolitan']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="publisher_name">Publisher Name</label>
+                <input type="text" name="publisher_name" id="publisher_name" value="<?php echo htmlspecialchars($form_data['publisher_name']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="publisher_address">Publisher Address</label>
+                <input type="text" name="publisher_address" id="publisher_address" value="<?php echo htmlspecialchars($form_data['publisher_address']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="publisher_email">Publisher Email</label>
+                <input type="email" name="publisher_email" id="publisher_email" value="<?php echo htmlspecialchars($form_data['publisher_email']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="date_submitted">Date Submitted</label>
+                <input type="text" name="date_submitted" id="date_submitted" value="<?php echo htmlspecialchars($form_data['date_submitted']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="publisher_telephone">Publisher Telephone</label>
+                <input type="text" name="publisher_telephone" id="publisher_telephone" value="<?php echo htmlspecialchars($form_data['publisher_telephone']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="publication_date">Publication Date</label>
+                <input type="date" name="publication_date" id="publication_date" value="<?php echo htmlspecialchars($form_data['publication_date']); ?>">
+            </div>
+            <div class="form-group">
+                <button type="submit" name="update_record">Update Record</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
