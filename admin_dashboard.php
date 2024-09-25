@@ -45,8 +45,8 @@
         
               <div class="grid-container">
                 <!--<div class="grid-item"><button class="metallic-button" type="submit"></button></div> -->
-                <div class="grid-item"><button class="metallic-button" type="submit">Delete User</button></div>
-                <div class="grid-item"><button class="metallic-button" type="submit">View Users</button></div>
+                <div class="grid-item"><button class="metallic-button" type="submit" onclick="window.location.href='delete_user.php'">Delete User</button></div>
+                <div class="grid-item"><button class="metallic-button" type="submit" onclick="window.location.href='view_user.php'">View Users</button></div>
               <!-- <div class="grid-item"><button class="metallic-button" type="submit">Statistics</button></div>
                <!--<div class="grid-item"><button class="metallic-button" type="submit">Reset User Password</button></div>-->
               <!--<div class="grid-item"><button class="metallic-button" type="submit">Processing</button></div> -->
@@ -72,11 +72,11 @@
              
             <div class="card">
                 <h2>Delete Form</h2>
-                <button class="metallic-button"type="submit">Delete</button>
+                <button class="metallic-button"type="submit" onclick="window.location.href='delete_form.php'">Delete</button>
             </div>
 			<div class="card">
                 <h2>Delete User</h2>
-                <button class="metallic-button"type="button" onclick="window.location.href='delete_form.php'">Delete</button>
+                <button class="metallic-button"type="button" onclick="window.location.href='delete_user.php'">Delete</button>
             </div>
             <div class="stats_card">
 
