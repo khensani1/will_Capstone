@@ -1,26 +1,4 @@
 <?php
-session_start();  // Start session to manage admin privileges
-
-// Debugging: Check if the session started successfully
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    die("Error: Session failed to start. Please check server session configuration.");
-}
-
-// Check if 'user_role' is set in the session
-if (!isset($_SESSION['user_role'])) {
-    error_log('Session Data: ' . print_r($_SESSION, true)); // Logs session data to server log
-    // Redirect to login page if 'user_role' is not set
-    header('Location: login.php');
-    exit();
-}
-
-// Ensure the user is an admin
-if ($_SESSION['user_role'] !== 'admin') {
-    // Redirect to login page if the user is not an admin
-    header('Location: login.php');
-    exit();
-}
-
 // Include your database connection script
 include 'components/connect.php';  // Adjust the path as necessary
 
@@ -133,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="container">
-    <h1>Admin: Delete User</h1>
+    <h1>Delete User</h1>
 
     <!-- Display success message -->
     <?php if (!empty($success_message)): ?>
@@ -145,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p class="error"><?php echo $error_message; ?></p>
     <?php endif; ?>
 
-    <!-- Form for admin to enter user_id to delete -->
+    <!-- Form for entering user_id to delete -->
     <form method="POST" action="delete_user.php">
         <label for="user_id">Enter User ID to delete:</label>
         <input type="number" id="user_id" name="user_id" required>
