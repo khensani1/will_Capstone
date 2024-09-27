@@ -6,17 +6,19 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     die("Error: Session failed to start. Please check server session configuration.");
 }
 
-// Debugging: Log session data to check if 'user_role' is set
+// Check if 'user_role' is set in the session
 if (!isset($_SESSION['user_role'])) {
     error_log('Session Data: ' . print_r($_SESSION, true)); // Logs session data to server log
-    die("Error: User role not set in the session. Please log in as an admin.");
+    // Redirect to login page if 'user_role' is not set
+    header('Location: login.php');
+    exit();
 }
 
-// Check if the user is logged in and is an admin
+// Ensure the user is an admin
 if ($_SESSION['user_role'] !== 'admin') {
     // Redirect to login page if the user is not an admin
     header('Location: login.php');
-    exit();  // Ensure no further code is executed
+    exit();
 }
 
 // Include your database connection script
