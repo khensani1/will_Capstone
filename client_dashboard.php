@@ -20,9 +20,9 @@
     <!-- <a href="#"><img src="C:\Users\User\Desktop\Ice_project\tools.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Key Metrics</a> -->
       <!-- <a href="#"><img src="C:\Users\User\Desktop\Ice_project\view.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;View Users</a>-->
         <a href="form.php"><img src="images/create.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Create Form</a>
-        <a href="#"><img src="images/view.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;View Form</a>
+        <a href="view_submission.php"><img src="images/view.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;View Form</a>
       
-        <a href="Landing_page.php"><img src="images/off.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Logout</a>
+        <a href="login.php"><img src="images/off.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Logout</a>
     </div>
 
     <!-- Main content area -->
