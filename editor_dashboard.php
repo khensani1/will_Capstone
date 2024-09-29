@@ -18,7 +18,6 @@
     <div class="sidebar">
        <!--- <a href="#">Dashboard</a> -->
        <h1>&nbsp;&nbsp;&nbsp;Dashboard</h1>
-       <a href="#"><img src="images/user.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Profile</a>
         <a href="view_submission.php"><img src="images/view.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;View Form</a>
         <a href="update_form.php"><img src="images/update.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Update Form</a>
         <a href="Landing_page.html"><img src="images/off.svg" alt="Description of the SVG" class="resize">&nbsp;&nbsp;Logout</a>
