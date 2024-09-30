@@ -112,57 +112,56 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // Add a page
 $pdf->AddPage();
 
-// Provincial separator content
-$provinceSeparator = "<div class='center' style='border-bottom: 2px solid #000; padding-bottom: 5px; margin-top: 5px; text-align: center;'>
-                        <h2 style='margin: 0;'>Province: $province</h2>
-                      </div>";
+// Prepare the HTML content for the PDF
+$html = '
+<body>
+<div class="A4Page">
+<blockquote>
+<header>
+ <p class="h4 centered-text">
+     ' . htmlspecialchars($form_data['publication_date']) . '
+         <div class="center"><h1 ><hr class="short-line2">' . htmlspecialchars($form_data['province']) . '<hr class="short-line"></h1></div>
+    
+ <p class="indentation">16852255/2025-Executor (2) <b>' . htmlspecialchars($form_data['title']) . ' ' . htmlspecialchars($form_data['last_name']) . ',' . htmlspecialchars($form_data['first_name']) . '</b>: (3)' . htmlspecialchars($form_data['title']) . '  ' . htmlspecialchars($form_data['address']) . '; (4)  ' . htmlspecialchars($form_data['start_date']) . '; (5) MASTER OF THE HIGH COURT ' . htmlspecialchars($form_data['metropolitan']) . ' ' . htmlspecialchars($form_data['publisher_address']) . ' 2ND   FLOOR DEPUTY MASTER OFFICE ' . htmlspecialchars($form_data['date_submitted']) . ', 10:00.<br>
+<span class="indentation">&nbsp;&nbsp;16852255/2025-Executor (2) <b>' . htmlspecialchars($form_data['title']) . ' ' . htmlspecialchars($form_data['last_name']) . ',' . htmlspecialchars($form_data['first_name']) . '</b>: (3) ' . htmlspecialchars($form_data['address']) . ', PENSIONER; (4) ' . htmlspecialchars($form_data['start_date']) . ' (5) MASTER OF THE HIGH COURT ' . htmlspecialchars($form_data['metropolitan']) . ' ' . htmlspecialchars($form_data['publisher_address']) . ' 2ND FLOOR DEPUTY MASTER OFFICE ' . htmlspecialchars($form_data['date_submitted']) . ', 10:00.</span></p> 
 
-// Construct notice message with the provided format
-$notice = "
-<div style='text-align: center; margin-bottom: 5px;'>
-    <h2 style='margin-left:40px;'>NOTICE OF SUBMISSION</h2>
-    <h3 style='margin: 0;'>Form ID: $form_id</h3>
-</div>
+ <hr class="long-line">
 
-$provinceSeparator
+<div class="left">&nbsp;&nbsp;<b>Form/Vorm K25</b><div>
 
-<p class='indentation' style='text-align: center;'>In accordance with the relevant regulations, this notice serves to inform all parties 
-concerned that the following details have been officially submitted. This documentation includes essential 
-information regarding the individual and their submission details.</p>
+<div class="center"><h2>NOTICE OF CURATOR AND TUTOR</h2></div>
 
-<p class='indentation' style='text-align: center;'>The information is presented in the following order: (1) Language: $language; 
-(2) Title: $title; (3) Province: $province; (4) Race: $race; (5) First Name: $first_name; 
-(6) Last Name: $last_name; (7) Address: $address; (8) Address Of: $addressOf; (9) Name Of Curator: 
-$nameOfcurator; (10) Address Of Curator: $addressCurator; (11) Schedule Meeting: $schedule_meeting; 
-(12) Start Date: $start_date; (13) Metropolitan: $metropolitan; (14) Publisher Name: 
-$publisher_name; (15) Publisher Address: $publisher_address; (16) Publisher Email: $publisher_email; 
-(17) Date Submitted: $date_submitted; (18) Publisher Telephone: $publisher_telephone; 
-(19) Publication Date: $publication_date.</p>
+<p class="indentation">In terms of section 75 of the Administration of Estates Act No. 66 of 1965 (as amended),
+ notice is hereby given of appointments by Masters as Curators or Tutors by Masters of the High Court, or of 
+ termination of such appointments (other than having ceased in their respective capacity) </p> 
+ <p class="indentation">The information is given in the following order: (1) Number of matter;(2)person 
+ under curatorship, or minor,and address; (3) curator or tutor;name and address of curator or tutor ;(4) 
+ whether appointment or termination (cease in capacity), and date; (5) Master of the High Court.<span></p>
 
-<p class='indentation' style='text-align: center;'>This notice is issued to ensure all relevant stakeholders are informed of 
-the details related to this submission, and to facilitate any necessary follow-up actions.</p>
+ <div class="center"><h2 >KENNISGEWINGS VAN KURATORS EN VOOGDE</h2></div>
+<p class="indentation">Ingevolge Artikel 75 van die Boedelwet No. 66 van 1965 (soos gewysig),
+ word hierby kennis gegee van die aanstelling van persone as kurators of voogde deur die Meesters van die Hoe Hof, 
+ of van die beïndiging van aanstellings sodanige  ' . htmlspecialchars($form_data['schedule_meeting']) . ' .</p>
+ <p class="indentation">Die inligting word verstrek in die volgorde: (1) Nommer van saak;
+  (2) person onder kurantele, of minderjarige, en adres;  (3) kurator of voog; naam en adres van kurator of
+   voog; (4) of aanstelling of beeindiging daarvan, en datum; 
+  (5) Meester van die Hooggeregshof.</p>
 
-<p class='indentation' style='text-align: center;'><strong>Translated Notice:</strong> In ooreenstemming met die relevante regulasies 
-word hierdie kennisgewing gegee om alle betrokke partye in te lig dat die volgende besonderhede 
-amptelik ingedien is. Hierdie dokumentasie sluit essensiële inligting in rakende die individu 
-en hul indieningsbesonderhede.</p>
-";
+<div class="center"><br><br><br><span class="highlight">This gazette is also available free online <a href="https://www.gpw.gov.za/"><u>www.gpwonline.co.za</u></span>
+ </div></a>
+</body>';
 
-// HTML content for the PDF
-$pdf->writeHTML($notice, true, false, true, false, '');
+// Output the HTML content into the PDF
+$pdf->writeHTML($html, true, false, true, false, '');
 
-// Path to save the PDF file
-$filePath = '/opt/lampp/htdocs/will_Capstone/form_submission.pdf';
+// Save the PDF to a file
+$file_name = '/opt/lampp/htdocs/will_Capstone/form_submission.pdf';
+$pdf->Output($file_name, 'F'); // 'F' to save to file
 
-$pdf->Output($filePath, 'F');
-
-// Log success
-logMessage("PDF saved successfully at: " . $filePath);
-
-// Clean the output buffer
-ob_end_clean();
-
-// Display the preview and download option
+// Output success message and download/preview links
 echo "<h2>PDF Generated Successfully</h2>";
 echo "<p><a href='/will_Capstone/form_submission.pdf' target='_blank'>Preview PDF</a></p>";
 echo "<p><a href='/will_Capstone/form_submission.pdf' download='form_submission.pdf'>Download PDF</a></p>";
+
+ob_end_flush();
+?>
